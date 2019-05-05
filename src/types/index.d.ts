@@ -1,8 +1,7 @@
 import Vue, { PluginFunction } from 'vue';
 import { Store } from 'vuex';
 
-
-type AsyncFunction = ((arg0: any) => Promise<any>) | Promise<any>;
+type AsyncFunction = ((any: any) => Promise<any>) | Promise<any>;
 
 export default class VueWait extends VueWaitInstance {
   constructor(options?: VueWaitOptions);
@@ -78,10 +77,11 @@ export class VueWaitInstance {
    * @param {number} [total]
    * @memberof VueWaitInstance
    */
-  progress(waiter: string, current: number, total?: number): Promise<any>;
-
-  waitFor<T extends Function | AsyncFunction>(waiter: string, callback: T, forceSync?: false): T;
+  progress(waiter: string, current: number, total?: number): void;
 }
+
+export declare function waitFor(waiter: string, callback: AsyncFunction, forceSync?: false): Promise<any>;
+export declare function waitFor(waiter: string, callback: Function, forceSync: true): Promise<any>;
 
 export interface VueWaitOptions{
   /**
@@ -113,7 +113,3 @@ export interface VueWaitOptions{
    */
   directiveName?: string;
 }
-
-export function mapWaitingGetters(getters: any): any;
-
-export function mapWaitingActions(vuexModuleName: any, actions?: any): any;
